@@ -1,15 +1,29 @@
-.App {
-  text-align: center;
-  padding: 20px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
-  min-height: 100vh;
-  color: #ffffff;
-  position: relative;
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
   overflow: hidden;
 }
 
-/* Tron grid effect in black and white */
+.App {
+  text-align: left;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background:
+    radial-gradient(circle at top left, #111827 0, #020617 52%, #000000 100%),
+    radial-gradient(circle at bottom right, rgba(79, 142, 247, 0.25) 0, transparent 55%);
+  height: 100vh;
+  width: 100vw;
+  color: #ffffff;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* Subtle grid texture */
 .App::before {
   content: "";
   position: absolute;
@@ -18,9 +32,9 @@
   right: 0;
   bottom: 0;
   background: 
-    linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
-  background-size: 30px 30px;
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 36px 36px;
   z-index: -1;
   animation: gridMove 20s linear infinite;
 }
@@ -30,7 +44,7 @@
   100% { background-position: 30px 30px; }
 }
 
-/* Tron lines effect in black and white */
+/* Soft light spots */
 .App::after {
   content: "";
   position: absolute;
@@ -39,174 +53,288 @@
   right: 0;
   bottom: 0;
   background: 
-    radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.1) 0%, transparent 20%),
-    radial-gradient(circle at 80% 70%, rgba(200, 200, 200, 0.1) 0%, transparent 20%);
+    radial-gradient(circle at 15% 20%, rgba(79, 142, 247, 0.16) 0%, transparent 45%),
+    radial-gradient(circle at 80% 80%, rgba(59, 130, 246, 0.2) 0%, transparent 50%);
   z-index: -1;
 }
 
-.header {
+/* Shell layout */
+.app-shell {
   display: flex;
-  justify-content: space-between;
+  height: 100%;
+  position: relative;
+}
+
+.sidebar {
+  width: 320px;
+  padding: 20px 18px 22px;
+  border-right: 1px solid rgba(15, 23, 42, 0.95);
+  background:
+    linear-gradient(180deg, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.95)),
+    radial-gradient(circle at top left, rgba(79, 142, 247, 0.25), transparent 55%);
+  backdrop-filter: blur(22px);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  z-index: 1;
+  box-shadow:
+    0 0 0 1px rgba(148, 163, 184, 0.06),
+    18px 0 40px rgba(15, 23, 42, 0.9);
+  height: 100%;
+  overflow: hidden;
+}
+
+.app-brand {
+  display: flex;
   align-items: center;
-  margin-bottom: 20px;
-  flex-wrap: wrap;
-  background: rgba(0, 0, 0, 0.8);
-  padding: 15px 30px;
-  border-radius: 12px;
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
-  border: 1px solid rgba(255, 255, 255, 0.5);
+  gap: 12px;
 }
 
-.header h1 {
-  color: #ffffff;
+.app-logo-mark {
+  width: 38px;
+  height: 38px;
+  border-radius: 14px;
+  background:
+    radial-gradient(circle at 0% 0%, rgba(255, 255, 255, 0.16) 0, transparent 55%),
+    linear-gradient(135deg, #4F8EF7, #1d4ed8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow:
+    0 10px 25px rgba(15, 23, 42, 0.85),
+    0 0 0 1px rgba(15, 23, 42, 0.85);
+}
+
+.app-logo-glyph {
+  font-size: 1.2rem;
+}
+
+.app-title-block h1 {
   margin: 0;
-  font-size: 2rem;
-  font-weight: 700;
-  text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+  font-size: 1.1rem;
+  letter-spacing: 0.04em;
 }
 
-.menu {
-  background: rgba(0, 0, 0, 0.8);
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
-  margin-bottom: 20px;
-  max-width: 1320px;
-  margin-left: auto;
-  margin-right: auto;
-  border: 1px solid rgba(255, 255, 255, 0.5);
+.app-title-block p {
+  margin-top: 6px;
+  margin-bottom: 0;
+  font-size: 0.85rem;
+  color: #b3b3b3;
+}
+
+.gesture-status {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  border-radius: 999px;
+  background: radial-gradient(circle at top left, rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.98));
+  border: 1px solid rgba(148, 163, 184, 0.28);
+  box-shadow:
+    0 10px 20px rgba(15, 23, 42, 0.8),
+    0 0 0 1px rgba(15, 23, 42, 0.9);
+}
+
+.gesture-indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: #666666;
+  box-shadow: 0 0 0 0 rgba(102, 102, 102, 0.4);
+  transition: all 0.25s ease;
+}
+
+.gesture-indicator.active {
+  background: #4F8EF7;
+  box-shadow: 0 0 0 6px rgba(79, 142, 247, 0.28);
+}
+
+.gesture-indicator.eraser {
+  background: #f97373;
+  box-shadow: 0 0 0 6px rgba(249, 115, 115, 0.2);
+}
+
+.gesture-indicator.idle {
+  background: #a3a3a3;
+}
+
+.gesture-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.gesture-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.gesture-sub {
+  font-size: 0.75rem;
+  color: #a3a3a3;
 }
 
 .controls {
   display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .control-group {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  background: rgba(30, 30, 30, 0.6);
-  padding: 12px 15px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  gap: 6px;
 }
 
 .control-group label {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 5px;
-  font-weight: 600;
-  color: #ffffff;
-  font-size: 0.9rem;
-  text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+  gap: 6px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #d4d4d4;
 }
 
 .controls input[type="range"] {
-  width: 100px;
+  width: 100%;
+  accent-color: #4F8EF7;
 }
 
 .controls input[type="color"] {
-  width: 50px;
-  height: 30px;
-  border: none;
+  width: 48px;
+  height: 28px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: transparent;
+  padding: 0;
   cursor: pointer;
-  border-radius: 4px;
-  border: 1px solid rgba(255, 255, 255, 0.5);
 }
 
 .controls input[type="checkbox"] {
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
+  accent-color: #4F8EF7;
+}
+
+.inline-control label {
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+
+.preset-colors {
+  display: flex;
+  gap: 6px;
+  margin-top: 4px;
 }
 
 .controls button {
-  padding: 10px 20px;
-  background: linear-gradient(135deg, #333333 0%, #ffffff 100%);
-  color: #000000;
-  border: none;
-  border-radius: 25px;
+  padding: 8px 14px;
+  background: radial-gradient(circle at top left, rgba(79, 142, 247, 0.12), rgba(15, 23, 42, 0.95));
+  color: #e5e7eb;
+  border-radius: 999px;
   cursor: pointer;
-  font-weight: 600;
-  font-size: 0.9rem;
-  transition: all 0.3s ease;
-  box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
-  border: 1px solid rgba(255, 255, 255, 0.5);
+  font-weight: 500;
+  font-size: 0.8rem;
+  border: 1px solid rgba(79, 142, 247, 0.45);
+  transition:
+    background 0.2s ease,
+    transform 0.16s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+  box-shadow:
+    0 10px 22px rgba(15, 23, 42, 0.85),
+    0 0 0 1px rgba(15, 23, 42, 1);
 }
 
 .controls button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.7);
+  background: radial-gradient(circle at top left, rgba(79, 142, 247, 0.18), rgba(15, 23, 42, 0.98));
+  transform: translateY(-1.5px) translateZ(0);
+  border-color: rgba(79, 142, 247, 0.8);
+  box-shadow:
+    0 14px 30px rgba(15, 23, 42, 0.9),
+    0 0 0 1px rgba(15, 23, 42, 1);
 }
 
 .controls button:disabled {
-  background-color: #333333;
+  opacity: 0.4;
   cursor: not-allowed;
   transform: none;
   box-shadow: none;
 }
 
-.value-display {
-  min-width: 20px;
-  text-align: center;
-  font-weight: bold;
-  color: #ffffff;
-  text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
-}
-
-.content-container {
+.control-row {
   display: flex;
-  gap: 20px;
-  width: 100%;
-  max-width: 1400px;
-  margin: 0 auto;
-  align-items: flex-start;
+  gap: 8px;
 }
 
-.drawing-section {
-  background: rgba(0, 0, 0, 0.8);
-  border-radius: 12px;
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
-  padding: 20px;
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.5);
+.value-display {
+  font-size: 0.78rem;
+  color: #a3a3a3;
+}
+
+.sidebar-footer {
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  font-size: 0.8rem;
+  color: #a3a3a3;
+}
+
+.sidebar-footer h2 {
+  margin: 0 0 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.sidebar-footer ul {
+  padding-left: 18px;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sidebar-footer li {
+  line-height: 1.4;
+}
+
+.workspace {
   flex: 1;
-  min-width: 0;
+  position: relative;
+  padding: 16px 20px 20px;
+  display: flex;
+  min-height: 0;
 }
 
-.camera-section {
-  background: rgba(0, 0, 0, 0.8);
-  border-radius: 12px;
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
-  padding: 15px;
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  width: 300px;
-  flex-shrink: 0;
-}
-
-.drawing-section h2, .camera-section h2 {
-  margin-top: 0;
-  color: #ffffff;
-  font-size: 1.3rem;
-  border-bottom: 2px solid rgba(255, 255, 255, 0.3);
-  padding-bottom: 10px;
-  text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+.canvas-wrapper {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  border-radius: 18px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at top, #020617 0, #020617 55%, #020617 100%);
+  box-shadow:
+    0 26px 80px rgba(15, 23, 42, 0.95),
+    0 0 0 1px rgba(15, 23, 42, 0.95);
 }
 
 .drawing-canvas {
   width: 100%;
-  height: 700px;
-  border: 2px solid rgba(255, 255, 255, 0.5);
-  border-radius: 8px;
-  background-color: rgba(10, 10, 10, 0.9);
-  box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.2);
+  height: 100%;
+  display: block;
+  border: none;
+  background-image:
+    linear-gradient(rgba(148, 163, 184, 0.18) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(148, 163, 184, 0.18) 1px, transparent 1px);
+  background-size: 36px 36px;
+  background-color: rgba(15, 23, 42, 0.96);
+}
+
+.cursor-canvas {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
 }
 
 .webcam-feed {
@@ -214,90 +342,58 @@
   visibility: hidden;
 }
 
-.overlay-canvas {
+.camera-overlay {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  width: 320px;
+  height: 240px;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #000000;
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  box-shadow:
+    0 18px 45px rgba(15, 23, 42, 0.95),
+    0 0 0 1px rgba(15, 23, 42, 1);
+  display: flex;
+}
+
+.camera-canvas {
   width: 100%;
-  height: 250px;
-  border: 2px solid rgba(255, 255, 255, 0.5);
-  border-radius: 8px;
-  background-color: #000000;
-}
-
-.instructions {
-  margin-top: 20px;
-  background: rgba(0, 0, 0, 0.8);
-  padding: 25px;
-  border-radius: 12px;
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
-  max-width: 1320px;
-  margin-left: auto;
-  margin-right: auto;
-  border: 1px solid rgba(255, 255, 255, 0.5);
-}
-
-.instructions h2 {
-  color: #ffffff;
-  margin-top: 0;
-  font-size: 1.3rem;
-  text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
-}
-
-.instructions ul {
-  text-align: left;
-  padding-left: 20px;
-  color: #e0e0e0;
-}
-
-.instructions li {
-  margin-bottom: 10px;
-  line-height: 1.5;
+  height: 100%;
+  display: block;
 }
 
 /* Responsive design */
 @media (max-width: 768px) {
-  .content-container {
+  .app-shell {
     flex-direction: column;
   }
-  
-  .drawing-section, .camera-section {
-    min-width: 100%;
-  }
-  
-  .header {
-    flex-direction: column;
-    gap: 15px;
-    text-align: center;
-  }
-  
-  .header h1 {
-    font-size: 1.5rem;
-  }
-  
-  .controls {
-    flex-direction: column;
-  }
-  
-  .control-group {
+
+  .sidebar {
     width: 100%;
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   }
-  
-  .drawing-canvas {
-    height: 500px;
+
+  .workspace {
+    padding: 12px;
   }
-  
-  .camera-section {
-    position: relative;
-    top: auto;
-    right: auto;
-    width: 100%;
-    margin-top: 20px;
+
+  .camera-overlay {
+    width: 45%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    right: 12px;
+    bottom: 12px;
   }
-  
+
   .App::before {
-    background-size: 20px 20px;
+    background-size: 24px 24px;
   }
   
   @keyframes gridMove {
     0% { background-position: 0 0; }
-    100% { background-position: 20px 20px; }
+    100% { background-position: 24px 24px; }
   }
 }
